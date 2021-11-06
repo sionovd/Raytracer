@@ -48,6 +48,11 @@ vec3 vec3::random(double min, double max) {
 	return vec3{ random_double(min, max), random_double(min, max), random_double(min, max) };
 }
 
+vec3 vec3::random() {
+	return vec3(random_double(), random_double(), random_double());
+}
+
+
 
 
 // vec3 Utility Functions
@@ -98,9 +103,17 @@ vec3 unit_vector(vec3 v) {
 
 vec3 random_in_unit_sphere() {
 	while (true) {
-		auto p = vec3::random(-1, 1);
-		if (p.length_squared() >= 1) continue;
-		return p;
+		auto v = vec3::random(-1, 1);
+		if (v.length_squared() >= 1) continue;
+		return v;
+	}
+}
+
+vec3 random_in_unit_disk() {
+	while (true) {
+		vec3 v{ random_double(-1, 1), random_double(-1, 1), 0 };
+		if (v.length_squared() >= 1) continue;
+		return v;
 	}
 }
 
